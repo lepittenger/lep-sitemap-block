@@ -13,3 +13,5 @@
  */
 
 // Your code starts here.
+
+require( 'blocks/sitemap.php');

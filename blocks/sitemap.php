@@ -21,7 +21,7 @@ function sitemap_block_init() {
 
 	$index_js = 'sitemap/index.js';
 	wp_register_script(
-		'sitemap-block-editor',
+		'sitemap-block-editor-script',
 		plugins_url( $index_js, __FILE__ ),
 		array(
 			'wp-blocks',
@@ -33,7 +33,7 @@ function sitemap_block_init() {
 
 	$editor_css = 'sitemap/editor.css';
 	wp_register_style(
-		'sitemap-block-editor',
+		'sitemap-block-editor-style',
 		plugins_url( $editor_css, __FILE__ ),
 		array(),
 		filemtime( "$dir/$editor_css" )
@@ -47,10 +47,19 @@ function sitemap_block_init() {
 		filemtime( "$dir/$style_css" )
 	);
 
-	register_block_type( 'lep-sitemap-block/sitemap', array(
-		'editor_script' => 'sitemap-block-editor',
-		'editor_style'  => 'sitemap-block-editor',
-		'style'         => 'sitemap-block',
-	) );
+	register_block_type( 'lep-sitemap-block/sitemap',
+		array(
+			'render_callback' => 'render_sitemap_block',
+			'attributes' => array(
+				'list_type' => array(
+					'type'  => 'string',
+					'default' => 'lep_list_type'
+				),
+			),
+			'editor_script'   => 'sitemap-block-editor-script',
+			'editor_style'    => 'sitemap-block-editor-style',
+			'style'           => 'sitemap-block',
+		)
+	);
 }
 add_action( 'init', 'sitemap_block_init' );

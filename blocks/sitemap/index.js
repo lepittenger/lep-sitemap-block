@@ -40,6 +40,13 @@
 			html: false,
 		},
 
+		attributes: {
+			list_type: {
+				type: 'string',
+				default: 'lep_list_type',
+			},
+		},
+
 		/**
 		 * The edit function describes the structure of your block in the context of the editor.
 		 * This represents what the editor will render when the block is used.
